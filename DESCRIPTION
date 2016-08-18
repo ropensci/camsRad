@@ -1,6 +1,6 @@
 Package: camsRad
 Type: Package
-Title: R Client for CAMS Radiation Service
+Title: Client for CAMS Radiation Service
 Version: 0.1.0
 Authors@R: person("Lukas", "Lundstrom", email = "lukas.rokka@gmail.com", role = c("aut", "cre"))
 Description: Provides time series of global, direct, and diffuse irradiations
@@ -10,7 +10,7 @@ Description: Provides time series of global, direct, and diffuse irradiations
   Europe, Africa, Atlantic Ocean, Middle East (-66° to 66° in both latitudes
   and longitudes). The time coverage of data is from 2004-02-01 up to 2 days
   ago. Data are available with a time step ranging from 15 min to 1 month.
-License: GPL-3
+License: MIT + file LICENSE
 Depends: R (>= 3.1.0)
 Imports:
     httr,
