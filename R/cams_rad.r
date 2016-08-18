@@ -82,7 +82,7 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
     stop(httr::content(r))
   }
 
-  parsed <- content(r)
+  parsed <- httr::content(r)
 
   if(verbose) print(parsed)
 
