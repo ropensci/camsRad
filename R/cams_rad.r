@@ -64,7 +64,7 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
     '</wps:ResponseForm>',
     '</wps:Execute>')
 
-  if(verbose) httr::set_config(verbose())
+  if(verbose) httr::set_config(httr::verbose())
 
   r <- tryCatch(
     httr::POST("http://www.soda-is.com/service/wps",
