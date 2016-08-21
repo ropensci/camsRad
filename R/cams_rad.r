@@ -93,8 +93,6 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
                encode= "raw",httr::accept_xml())
     , error = function(e) {e})
 
-  #return(r)
-
   if(is.null(r$status_code)) {
     # should not happen
     stop(r)
@@ -120,8 +118,6 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
 
   # get url to the processed file on soda-pro server
   url <- xml2::xml_attr(xml2::xml_find_all(parsed, "//wps:Reference"), "href")
-
-  print(filename)
 
   # if filename=="" the data is saved in memory, oterwise data is writen to disk
   if(filename=="") {

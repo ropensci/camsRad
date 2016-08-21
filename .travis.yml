@@ -1,11 +1,10 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: R
 #sudo: false
 sudo: required
 cache: packages
 
-#apt_packages:
+after_success:
+  - Rscript -e 'covr::codecov()'
 
 addons:
   apt:
@@ -13,6 +12,9 @@ addons:
       - libxml2-dev
       - libnetcdf-dev
       - netcdf-bin
+
+r_github_packages:
+  - jimhester/covr
 
 notifications:
   email:

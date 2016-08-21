@@ -19,9 +19,11 @@ Imports:
     xml2,
     readr
 Suggests:
-     roxygen2,
-     knitr,
-     ncdf4
+    roxygen2,
+    knitr,
+    ncdf4,
+    testthat,
+    covr
 URL: https://github.com/lukas-rokka/camsRad
 BugReports: https://github.com/lukas-rokka/camsRad/issues
 LazyData: TRUE
