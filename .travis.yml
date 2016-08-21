@@ -5,12 +5,14 @@ language: R
 sudo: required
 cache: packages
 
-apt_packages:
- - libnetcdf-dev
-# - udunits-bin
-# - libudunits2-dev
- - netcdf-bin
+#apt_packages:
 
+addons:
+  apt:
+    packages:
+      - libxml2-dev
+      - libnetcdf-dev
+      - netcdf-bin
 
 notifications:
   email:
