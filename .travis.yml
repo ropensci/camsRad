@@ -7,7 +7,7 @@ cache: packages
 addons:
    apt:
      packages:
-       - netcdf-bin # needed for netcdf4 package
+       - netcdf-bin # needed for netcdf4
 
 notifications:
   email:
