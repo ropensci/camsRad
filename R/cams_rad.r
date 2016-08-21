@@ -1,4 +1,4 @@
-#' @title API client for
+#' API client for
 #'   \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
 #'   radiation service}
 #'
@@ -21,8 +21,28 @@
 #' @return list(ok=TRUE/FALSE, response=response). If ok=TRUE, response is the
 #'   response from httr::GET. If ok=FALSE, response holds exception text
 #'
-#' @import dplyr
+#' @examples \dontrun{
+#' library(ncdf4)
 #'
+#' filename <- paste0(tempfile(), ".nc")
+#'
+#' r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10",
+#'               format = "application/x-netcdf", filename=filename)
+#'
+#' # Access the on disk stored ncdf4 file
+#' nc <- nc_open(r$respone$content)
+#' # list names of available variables
+#' names(nc$var)
+#'
+#' # create data.frame with datetime and global horizontal irradiation
+#' df <- data.frame(datetime=as.POSIXct(nc$dim$time$vals, "UTC",
+#'                                      origin="1970-01-01"),
+#'                  GHI = ncvar_get(nc, "GHI"))
+#'
+#' plot(df, type="l")
+#' }
+#'
+#' @import dplyr
 #' @export
 
 cams_api <- function(username, lat, lng, date_begin, date_end,
@@ -101,6 +121,8 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
   # get url to the processed file on soda-pro server
   url <- xml2::xml_attr(xml2::xml_find_all(parsed, "//wps:Reference"), "href")
 
+  print(filename)
+
   # if filename=="" the data is saved in memory, oterwise data is writen to disk
   if(filename=="") {
     r <- httr::GET(url)
@@ -111,15 +133,22 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
   return(list(ok=(r$status_code==200), respone=r))
 }
 
-#' @title Retrieve CAMS solar radiation data from
+#' Retrieve CAMS solar radiation data from
 #'   \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
 #'   radiation service}
 #' @inheritParams cams_api
 #'
-#' @return A tibble (data.frame) with requested solar data
+#' @return A tibble (data frame) with requested solar data
+#'
+#' @examples \dontrun{
+#' username <- "your@email.com" # An email registrated at soda-pro.com
+#' df <- cams_get_radition(username, lat=60, lon=15,
+#'                         date_begin="2016-01-01", date_end="2016-01-15")
+#' print(df)
+#' }
 #'
 #' @export
-#'
+
 cams_get_radition <- function(username, lat, lng, date_begin, date_end,
                      alt=-999, time_step="PT01H", time_ref="UT", verbose=FALSE) {
   r <- cams_api(username, lat, lng, date_begin, date_end, alt, time_step, time_ref, verbose,
@@ -131,12 +160,19 @@ cams_get_radition <- function(username, lat, lng, date_begin, date_end,
   return(df)
 }
 
-#' @title Retrieve McClear clear sky solar radiation data from
+#' Retrieve McClear clear sky solar radiation data from
 #'   \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
 #'   radiation service}
 #' @inheritParams cams_api
 #'
 #' @return A tibble (data.frame) with requested solar data
+#'
+#' @examples \dontrun{
+#' username <- "your@email.com" # An email registrated at soda-pro.com
+#' df <- cams_get_mcclear(username, lat=60, lon=15,
+#'                        date_begin="2016-01-01", date_end="2016-01-15")
+#' print(df)
+#' }
 #'
 #' @export
 #'
@@ -151,8 +187,9 @@ cams_get_mcclear <- function(username, lat, lng, date_begin, date_end,
   return(df)
 }
 
-# internal parser of the csv data
-# TODO: could break if the csv formating is changed
+#' internal parser of the csv data
+#' TODO: could break if the csv formating is changed.
+#' @noRd
 cams_parse <- function(r_str, verbose=FALSE) {
   # Last row with '#' holds column names, the data part starts after that
   j <- 0
@@ -161,6 +198,7 @@ cams_parse <- function(r_str, verbose=FALSE) {
     j <- j + 1
   }
 
+  # output info part of the csv file
   message(writeLines(readr::read_lines(r_str, n_max=j)))
 
   # get column names
@@ -170,9 +208,9 @@ cams_parse <- function(r_str, verbose=FALSE) {
   # get data, parse first column with datetime
   df <- readr::read_delim(r_str, ";", col_names = FALSE, skip=j) %>%
     mutate(X1=readr::parse_datetime(paste(substr(X1,23,32), substr(X1,34,38)))) %>%
-    setNames(unlist(col_names))
+    stats::setNames(unlist(col_names))
 
-  if(verbose) print(df)
+  if(verbose) message(df)
 
   return(df)
 }

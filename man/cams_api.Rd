@@ -43,4 +43,32 @@ radiation data}
 list(ok=TRUE/FALSE, response=response). If ok=TRUE, response is the
   response from httr::GET. If ok=FALSE, response holds exception text
 }
+\description{
+API client for
+  \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
+  radiation service}
+}
+\examples{
+\dontrun{
+library(ncdf4)
+
+filename <- paste0(tempfile(), ".nc")
+
+r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10",
+              format = "application/x-netcdf", filename=filename)
+
+# Access the on disk stored ncdf4 file
+nc <- nc_open(r$respone$content)
+# list names of available variables
+names(nc$var)
+
+# create data.frame with datetime and global horizontal irradiation
+df <- data.frame(datetime=as.POSIXct(nc$dim$time$vals, "UTC",
+                                     origin="1970-01-01"),
+                 GHI = ncvar_get(nc, "GHI"))
+
+plot(df, type="l")
+}
+
+}
 

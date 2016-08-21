@@ -32,4 +32,18 @@ hourly, 'P01D' for daily, 'P01M' for monthly}
 \value{
 A tibble (data.frame) with requested solar data
 }
+\description{
+Retrieve McClear clear sky solar radiation data from
+  \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
+  radiation service}
+}
+\examples{
+\dontrun{
+username <- "your@email.com" # An email registrated at soda-pro.com
+df <- cams_get_mcclear(username, lat=60, lon=15,
+                       date_begin="2016-01-01", date_end="2016-01-15")
+print(df)
+}
+
+}
 

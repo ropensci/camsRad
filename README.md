@@ -24,7 +24,9 @@ library("camsRad")
 
 To access the CAMS radiation service you need to register at <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>. The email you use at the registration step will be used for authentication.
 
-### Workflow
+### Example 1
+
+Get CAMS solar data straight into a R data frame.
 
 ``` r
 username <- "your@email.com" # An email registrated at soda-pro.com
@@ -32,4 +34,29 @@ username <- "your@email.com" # An email registrated at soda-pro.com
 df <- cams_get_radition(username, lat=60, lon=15, 
                         date_begin="2016-01-01", date_end="2016-01-15")
 print(df)
+```
+
+### Example 2
+
+Retrieve CAMS solar data in ncdf format. You need to have `ncdf4` installed
+
+``` r
+library(ncdf4)
+
+filename <- paste0(tempfile(), ".nc")
+
+r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10", 
+              format = "application/x-netcdf", filename = filename)
+
+# Access the on disk stored ncdf4 file 
+nc <- nc_open(r$respone$content)
+
+# list names of available variables
+names(nc$var)
+
+# create data.frame with datetime and global horizontal irradiation and plot it
+df <- data.frame(datetime = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
+                 GHI = ncvar_get(nc, "GHI"))
+
+plot(df, type="l")
 ```
