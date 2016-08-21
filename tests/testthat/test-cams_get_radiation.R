@@ -4,8 +4,7 @@ test_that("Calling CAMS radiation service works", {
   skip_on_cran()
 
   username=Sys.getenv("CAMS_USERNAME")
-
-  if(username=="") skip("need CAMS_USERNAME to be set")
+  if(username=="") skip(" CAMS_USERNAME need to be set")
 
   df <- cams_get_radition(username, 60, 15, "2016-06-01", "2016-06-10")
 

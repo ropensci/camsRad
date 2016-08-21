@@ -3,18 +3,12 @@ language: R
 sudo: required
 cache: packages
 
-after_success:
-  - Rscript -e 'covr::codecov()'
-
 addons:
   apt:
     packages:
       - libxml2-dev
       - libnetcdf-dev
       - netcdf-bin
-
-r_github_packages:
-  - jimhester/covr
 
 notifications:
   email:
