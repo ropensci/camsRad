@@ -6,7 +6,7 @@ test_that("Calling CAMS radiation service works", {
   username=Sys.getenv("CAMS_USERNAME")
   if(username=="") skip(" CAMS_USERNAME need to be set")
 
-  df <- cams_get_radition(username, 60, 15, "2016-06-01", "2016-06-10")
+  df <- cams_get_radition(username, 60, 15, "2016-06-01", "2016-06-10", time_step="PT01H")
 
   expect_is(df, "data.frame")
   expect_equal(nrow(df),240)

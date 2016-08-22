@@ -40,6 +40,8 @@
 #'                  GHI = ncvar_get(nc, "GHI"))
 #'
 #' plot(df, type="l")
+#'
+#' nc_close(nc)
 #' }
 #'
 #' @import dplyr
@@ -129,7 +131,7 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
   return(list(ok=(r$status_code==200), respone=r))
 }
 
-#' Retrieve hourly CAMS solar radiation data
+#' Retrieve CAMS solar radiation data
 #' @inheritParams cams_api
 #'
 #' @return A tibble (data frame) with requested solar data
@@ -144,8 +146,8 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
 #' @export
 
 cams_get_radition <- function(username, lat, lng, date_begin, date_end,
-                     alt=-999, verbose=FALSE) {
-  r <- cams_api(username, lat, lng, date_begin, date_end, alt,
+                              time_step="PT01H", alt=-999, verbose=FALSE) {
+  r <- cams_api(username, lat, lng, date_begin, date_end, alt, time_step=time_step,
                 verbose=verbose, service="get_cams_radiation", format="application/csv")
   if(r$ok==FALSE) {
     stop(r$response, call. = FALSE)
@@ -154,7 +156,7 @@ cams_get_radition <- function(username, lat, lng, date_begin, date_end,
   return(df)
 }
 
-#' Retrieve hourly McClear clear sky solar radiation data
+#' Retrieve McClear clear sky solar radiation data
 #' @inheritParams cams_api
 #'
 #' @return A tibble (data.frame) with requested solar data
@@ -170,7 +172,7 @@ cams_get_radition <- function(username, lat, lng, date_begin, date_end,
 #'
 cams_get_mcclear <- function(username, lat, lng, date_begin, date_end,
                               alt=-999, verbose=FALSE) {
-  r <- cams_api(username, lat, lng, date_begin, date_end, alt,
+  r <- cams_api(username, lat, lng, date_begin, date_end, alt, time_step=time_step,
                 verbose=verbose, service="get_mcclear", format="application/csv")
   if(r$ok==FALSE) {
     stop(r$response, call. = FALSE)
@@ -179,7 +181,7 @@ cams_get_mcclear <- function(username, lat, lng, date_begin, date_end,
   return(df)
 }
 
-#' internal parser of csv data, expects hourly data
+#' internal parser of csv data.
 #' TODO: could break if the csv formating is changed,
 #' use json or ncdf instead (more reliable but slower)?
 #' @noRd
