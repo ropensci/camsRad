@@ -129,9 +129,7 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
   return(list(ok=(r$status_code==200), respone=r))
 }
 
-#' Retrieve CAMS solar radiation data from
-#'   \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
-#'   radiation service}
+#' Retrieve hourly CAMS solar radiation data
 #' @inheritParams cams_api
 #'
 #' @return A tibble (data frame) with requested solar data
@@ -146,19 +144,17 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
 #' @export
 
 cams_get_radition <- function(username, lat, lng, date_begin, date_end,
-                     alt=-999, time_step="PT01H", time_ref="UT", verbose=FALSE) {
-  r <- cams_api(username, lat, lng, date_begin, date_end, alt, time_step, time_ref, verbose,
-                service = "get_cams_radiation", format="application/csv")
+                     alt=-999, verbose=FALSE) {
+  r <- cams_api(username, lat, lng, date_begin, date_end, alt,
+                verbose=verbose, service="get_cams_radiation", format="application/csv")
   if(r$ok==FALSE) {
     stop(r$response, call. = FALSE)
   }
-  df <- cams_parse(readr::read_file(r$respone$content), verbose)
+  df <- cams_parse(readr::read_file(r$respone$content))
   return(df)
 }
 
-#' Retrieve McClear clear sky solar radiation data from
-#'   \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
-#'   radiation service}
+#' Retrieve hourly McClear clear sky solar radiation data
 #' @inheritParams cams_api
 #'
 #' @return A tibble (data.frame) with requested solar data
@@ -173,20 +169,21 @@ cams_get_radition <- function(username, lat, lng, date_begin, date_end,
 #' @export
 #'
 cams_get_mcclear <- function(username, lat, lng, date_begin, date_end,
-                              alt=-999, time_step="PT01H", time_ref="UT", verbose=FALSE) {
-  r <- cams_api(username, lat, lng, date_begin, date_end, alt, time_step, time_ref, verbose=,
-                service = "get_mcclear", format="application/csv")
+                              alt=-999, verbose=FALSE) {
+  r <- cams_api(username, lat, lng, date_begin, date_end, alt,
+                verbose=verbose, service="get_mcclear", format="application/csv")
   if(r$ok==FALSE) {
     stop(r$response, call. = FALSE)
   }
-  df <- cams_parse(readr::read_file(r$respone$content), verbose)
+  df <- cams_parse(readr::read_file(r$respone$content))
   return(df)
 }
 
-#' internal parser of the csv data
-#' TODO: could break if the csv formating is changed.
+#' internal parser of csv data, expects hourly data
+#' TODO: could break if the csv formating is changed,
+#' use json or ncdf instead (more reliable but slower)?
 #' @noRd
-cams_parse <- function(r_str, verbose=FALSE) {
+cams_parse <- function(r_str) {
   # Last row with '#' holds column names, the data part starts after that
   j <- 0
   for(row_str in readr::read_lines(r_str, n_max=50)) {
@@ -197,16 +194,14 @@ cams_parse <- function(r_str, verbose=FALSE) {
   # output info part of the csv file
   message(writeLines(readr::read_lines(r_str, n_max=j)))
 
-  # get column names
-  col_names <- readr::read_lines(r_str, skip=j-1, n_max=1)
-  col_names <- strsplit(substr(col_names,3, nchar(col_names)), ";")
+  # get column names, change first column name to 'timestamp'
+  col_names <- unlist(readr::read_lines(r_str, skip=j-1, n_max=1) %>% strsplit(";"))
+  col_names <- c("timestamp", col_names[2:(length(col_names))])
 
-  # get data, parse first column with datetime
+  # get data, parse first column as datetime
   df <- readr::read_delim(r_str, ";", col_names = FALSE, skip=j) %>%
     mutate(X1=readr::parse_datetime(paste(substr(X1,23,32), substr(X1,34,38)))) %>%
-    stats::setNames(unlist(col_names))
-
-  if(verbose) message(df)
+    stats::setNames(col_names)
 
   return(df)
 }

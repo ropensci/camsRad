@@ -13,7 +13,8 @@ test_that("Calling CAMS radiation service works", {
   expect_equal(ncol(df),11)
   expect_is(df[[1,1]], "POSIXct")
   for(i in 2:11) {expect_is(df[[1,i]], "numeric")}
-  expect_true(all(names(df) %in% c("Observation period","TOA","Clear sky GHI",
+  expect_true(all(names(df) %in% c("timestamp","TOA","Clear sky GHI",
                                    "Clear sky BHI","Clear sky DHI","Clear sky BNI",
                                    "GHI","BHI","DHI","BNI","Reliability")))
+  expect_equal(as.integer(df[[2,1]]) - as.integer(df[[1,1]]), 3600)
 })

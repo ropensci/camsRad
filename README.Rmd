@@ -41,7 +41,8 @@ To access the CAMS radiation service you need to register at [http://www.soda-pr
 
 ### Example 1
 
-Get CAMS solar data straight into a R data frame.
+Get hourly CAMS solar data into a R data frame. For the location 
+60° latitude and 15° longitude, and for period 2016-01-01 to 2016-01-15.
 ```{r eval=FALSE}
 username <- "your@email.com" # An email registrated at soda-pro.com
 
@@ -51,14 +52,16 @@ print(df)
 
 ```
 ### Example 2
-Retrieve CAMS solar data in ncdf format. You need to have `ncdf4` installed
+Retrieve daily CAMS solar data in ncdf format. You need to have `ncdf4` installed
 ```{r eval=FALSE}
 library(ncdf4)
 
 filename <- paste0(tempfile(), ".nc")
 
 r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10", 
-              format = "application/x-netcdf", filename = filename)
+              format="application/x-netcdf",
+              time_step = "P01D",
+              filename=filename)
 
 # Access the on disk stored ncdf4 file 
 nc <- nc_open(r$respone$content)
