@@ -4,8 +4,8 @@
 \alias{cams_get_mcclear}
 \title{Retrieve McClear clear sky solar radiation data}
 \usage{
-cams_get_mcclear(username, lat, lng, date_begin, date_end, alt = -999,
-  verbose = FALSE)
+cams_get_mcclear(username, lat, lng, date_begin, date_end,
+  time_step = "PT01H", alt = -999, verbose = FALSE)
 }
 \arguments{
 \item{username}{The email registered at soda-pro.com.}
@@ -17,6 +17,9 @@ cams_get_mcclear(username, lat, lng, date_begin, date_end, alt = -999,
 \item{date_begin}{Start date as 'yyy-mm-dd' string}
 
 \item{date_end}{End date as 'yyy-mm-dd' string}
+
+\item{time_step}{'PT01M' for minutes, 'PT15M' for 15 minutes, 'PT01H' for
+hourly, 'P01D' for daily, 'P01M' for monthly}
 
 \item{alt}{The altitude in meters, use -999 to let CAMS decide}
 
