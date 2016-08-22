@@ -44,7 +44,7 @@ df <- cams_get_radition(
   time_step="PT01H") # Use hourly time step
 
 ```
-As seen above the `cams_get_radiation()` prints additional information about the data, these can be suppressed by wrapping the call with `suppressMessages()`. 
+As seen above the `cams_get_radiation()` prints additional information about the data, these can be suppressed by wrapping the call with `suppressMessages()`. Next the head of the table is printed.
 
 ```{r}
 print(df)
@@ -52,7 +52,7 @@ print(df)
 ```
 The first column holds the timestamp information. It follows the convention of giving solar radiation as the sum during the previous hour. E.g. the timestamp of 14:00 shows the solar radiation during 13:00-14:00. 
 
-## More advanced retrievals
+## Advanced retrievals
 To use other data formats and to save data to the disk we need to use the `cams_api()`. The example bellow writes daily solar radiation in netCDF format to the disk. You need to have the `ncdf4` package installed.
 
 ```{r, warning = FALSE, fig.width=7}
@@ -67,7 +67,7 @@ r <- cams_api(
   filename=filename)
 
 # Access the on disk stored netCDF file
-nc <- nc_open(filename)  
+nc <- nc_open(r$respone$content)  
 
 # List names of available variables
 names(nc$var)
