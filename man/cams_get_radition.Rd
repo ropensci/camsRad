@@ -2,12 +2,10 @@
 % Please edit documentation in R/cams_rad.r
 \name{cams_get_radition}
 \alias{cams_get_radition}
-\title{Retrieve CAMS solar radiation data from
-  \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
-  radiation service}}
+\title{Retrieve CAMS solar radiation data}
 \usage{
-cams_get_radition(username, lat, lng, date_begin, date_end, alt = -999,
-  time_step = "PT01H", time_ref = "UT", verbose = FALSE)
+cams_get_radition(username, lat, lng, date_begin, date_end,
+  time_step = "PT01H", alt = -999, verbose = FALSE)
 }
 \arguments{
 \item{username}{The email registered at soda-pro.com.}
@@ -20,12 +18,10 @@ cams_get_radition(username, lat, lng, date_begin, date_end, alt = -999,
 
 \item{date_end}{End date as 'yyy-mm-dd' string}
 
-\item{alt}{The altitude in meters, use -999 to let CAMS decide}
-
 \item{time_step}{'PT01M' for minutes, 'PT15M' for 15 minutes, 'PT01H' for
 hourly, 'P01D' for daily, 'P01M' for monthly}
 
-\item{time_ref}{'UT' for universal time, 'TST' for true solar time}
+\item{alt}{The altitude in meters, use -999 to let CAMS decide}
 
 \item{verbose}{TRUE for verbose output}
 }
@@ -33,14 +29,12 @@ hourly, 'P01D' for daily, 'P01M' for monthly}
 A tibble (data frame) with requested solar data
 }
 \description{
-Retrieve CAMS solar radiation data from
-  \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
-  radiation service}
+Retrieve CAMS solar radiation data
 }
 \examples{
 \dontrun{
-username <- "your@email.com" # An email registrated at soda-pro.com
-df <- cams_get_radition(username, lat=60, lon=15,
+username <- "your@email.com" # An email registered at soda-pro.com
+df <- cams_get_radition(username, lat=60, lng=15,
                         date_begin="2016-01-01", date_end="2016-01-15")
 print(df)
 }

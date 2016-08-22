@@ -34,7 +34,7 @@
 #' # list names of available variables
 #' names(nc$var)
 #'
-#' # create data.frame with datetime and global horizontal irradiation
+#' # create data.frame with timestamp and global horizontal irradiation
 #' df <- data.frame(datetime=as.POSIXct(nc$dim$time$vals, "UTC",
 #'                                      origin="1970-01-01"),
 #'                  GHI = ncvar_get(nc, "GHI"))
@@ -137,7 +137,7 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
 #' @return A tibble (data frame) with requested solar data
 #'
 #' @examples \dontrun{
-#' username <- "your@email.com" # An email registrated at soda-pro.com
+#' username <- "your@email.com" # An email registered at soda-pro.com
 #' df <- cams_get_radition(username, lat=60, lng=15,
 #'                         date_begin="2016-01-01", date_end="2016-01-15")
 #' print(df)
@@ -162,7 +162,7 @@ cams_get_radition <- function(username, lat, lng, date_begin, date_end,
 #' @return A tibble (data.frame) with requested solar data
 #'
 #' @examples \dontrun{
-#' username <- "your@email.com" # An email registrated at soda-pro.com
+#' username <- "your@email.com" # An email registered at soda-pro.com
 #' df <- cams_get_mcclear(username, lat=60, lng=15,
 #'                        date_begin="2016-01-01", date_end="2016-01-15")
 #' print(df)
@@ -171,7 +171,7 @@ cams_get_radition <- function(username, lat, lng, date_begin, date_end,
 #' @export
 #'
 cams_get_mcclear <- function(username, lat, lng, date_begin, date_end,
-                              alt=-999, verbose=FALSE) {
+                             time_step="PT01H", alt=-999, verbose=FALSE) {
   r <- cams_api(username, lat, lng, date_begin, date_end, alt, time_step=time_step,
                 verbose=verbose, service="get_mcclear", format="application/csv")
   if(r$ok==FALSE) {

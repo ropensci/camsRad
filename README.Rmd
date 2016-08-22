@@ -43,7 +43,7 @@ To access the CAMS radiation service you need to register at [http://www.soda-pr
 
 Get hourly CAMS solar data into a R data frame. For the location 60° latitude and 15° longitude, and for period 2016-01-01 to 2016-01-15.
 ```{r eval=FALSE}
-username <- "your@email.com" # An email registrated at soda-pro.com
+username <- "your@email.com" # An email registered at soda-pro.com
 
 df <- cams_get_radition(username, lat=60, lng=15, 
                         date_begin="2016-01-01", date_end="2016-01-15")
@@ -68,8 +68,8 @@ nc <- nc_open(r$respone$content)
 # list names of available variables
 names(nc$var)
 
-# create data.frame with datetime and global horizontal irradiation and plot it
-df <- data.frame(datetime = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
+# create data.frame with timestamp and global horizontal irradiation and plot it
+df <- data.frame(timestamp = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
                  GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")

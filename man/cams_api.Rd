@@ -62,12 +62,14 @@ nc <- nc_open(r$respone$content)
 # list names of available variables
 names(nc$var)
 
-# create data.frame with datetime and global horizontal irradiation
+# create data.frame with timestamp and global horizontal irradiation
 df <- data.frame(datetime=as.POSIXct(nc$dim$time$vals, "UTC",
                                      origin="1970-01-01"),
                  GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")
+
+nc_close(nc)
 }
 
 }

@@ -23,8 +23,9 @@ Suggests:
     knitr,
     ncdf4,
     testthat,
-    covr
+    rmarkdown
 URL: https://github.com/lukas-rokka/camsRad
 BugReports: https://github.com/lukas-rokka/camsRad/issues
 LazyData: TRUE
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr
