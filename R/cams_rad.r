@@ -138,7 +138,7 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
 #'
 #' @examples \dontrun{
 #' username <- "your@email.com" # An email registrated at soda-pro.com
-#' df <- cams_get_radition(username, lat=60, lon=15,
+#' df <- cams_get_radition(username, lat=60, lng=15,
 #'                         date_begin="2016-01-01", date_end="2016-01-15")
 #' print(df)
 #' }
@@ -165,7 +165,7 @@ cams_get_radition <- function(username, lat, lng, date_begin, date_end,
 #'
 #' @examples \dontrun{
 #' username <- "your@email.com" # An email registrated at soda-pro.com
-#' df <- cams_get_mcclear(username, lat=60, lon=15,
+#' df <- cams_get_mcclear(username, lat=60, lng=15,
 #'                        date_begin="2016-01-01", date_end="2016-01-15")
 #' print(df)
 #' }
