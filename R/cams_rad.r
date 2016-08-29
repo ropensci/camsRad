@@ -92,7 +92,8 @@ cams_api <- function(username, lat, lng, date_begin, date_end,
     httr::POST("http://www.soda-is.com/service/wps",
                body=body,
                httr::content_type("text/xml; charset=utf.8"),
-               encode= "raw",httr::accept_xml())
+               encode= "multipart",
+               httr::accept_xml())
     , error = function(e) {e})
 
   if(is.null(r$status_code)) {
