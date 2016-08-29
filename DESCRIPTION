@@ -14,10 +14,10 @@ Description: CAMS radiations service provides time series of global, direct, and
 License: MIT + file LICENSE
 Depends: R (>= 3.1.0)
 Imports:
-    httr,
-    dplyr,
-    xml2,
-    readr
+    httr (>= 1.2.1),
+    dplyr (>= 0.5.0),
+    xml2 (>= 1.0.0),
+    readr (>= 1.0.5)
 Suggests:
     roxygen2,
     knitr,
