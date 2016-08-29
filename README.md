@@ -28,19 +28,19 @@ To access the CAMS radiation service you need to register at <http://www.soda-pr
 
 ### Example 1
 
-Get CAMS solar data straight into a R data frame.
+Get hourly CAMS solar data into a R data frame. For the location 60° latitude and 15° longitude, and for period 2016-01-01 to 2016-01-15.
 
 ``` r
-username <- "your@email.com" # An email registrated at soda-pro.com
+username <- "your@email.com" # An email registered at soda-pro.com
 
-df <- cams_get_radition(username, lat=60, lon=15, 
+df <- cams_get_radition(username, lat=60, lng=15, 
                         date_begin="2016-01-01", date_end="2016-01-15")
 print(df)
 ```
 
 ### Example 2
 
-Retrieve CAMS solar data in ncdf format. You need to have `ncdf4` installed
+Retrieve daily CAMS solar data in netCDF format. You need to have the `ncdf4` package installed.
 
 ``` r
 library(ncdf4)
@@ -48,7 +48,9 @@ library(ncdf4)
 filename <- paste0(tempfile(), ".nc")
 
 r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10", 
-              format = "application/x-netcdf", filename = filename)
+              format="application/x-netcdf",
+              time_step = "P01D",
+              filename=filename)
 
 # Access the on disk stored ncdf4 file 
 nc <- nc_open(r$respone$content)
@@ -56,9 +58,11 @@ nc <- nc_open(r$respone$content)
 # list names of available variables
 names(nc$var)
 
-# create data.frame with datetime and global horizontal irradiation and plot it
-df <- data.frame(datetime = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
+# create data.frame with timestamp and global horizontal irradiation and plot it
+df <- data.frame(timestamp = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
                  GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")
+
+nc_close(nc)
 ```
