@@ -17,7 +17,7 @@ Imports:
     httr (>= 1.2.1),
     dplyr (>= 0.5.0),
     xml2 (>= 1.0.0),
-    readr (>= 1.0.5)
+    readr (>= 1.0.0)
 Suggests:
     roxygen2,
     knitr,
