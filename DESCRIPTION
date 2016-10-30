@@ -2,7 +2,9 @@ Package: camsRad
 Type: Package
 Title: Client for CAMS Radiation Service
 Version: 0.1.1.9001
+Date: 2016-10-30
 Authors@R: person("Lukas", "Lundström", email = "lukas.rokka@gmail.com", role = c("aut", "cre"))
+Maintainer: Lukas Lundström <lukas.rokka@gmail.com>
 Description: CAMS radiations service provides time series of global, direct, and
     diffuse irradiations on horizontal surface, and direct irradiation on normal
     plane for the actual weather conditions as well as for clear-sky conditions.
