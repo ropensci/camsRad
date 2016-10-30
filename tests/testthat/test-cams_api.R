@@ -1,7 +1,7 @@
 context("cams_api")
 
 test_that("Calling CAMS radiation service works", {
-  skip_on_cran()
+  #skip_on_cran()
 
   username=Sys.getenv("CAMS_USERNAME")
   if(username=="") skip("need CAMS_USERNAME to be set")
