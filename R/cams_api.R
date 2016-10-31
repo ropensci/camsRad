@@ -1,9 +1,10 @@
 #' API client for
-#'   \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
-#'   radiation service}
+#' \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
+#' radiation service}
 #'
 #' @inheritParams cams_get_radiation
-#' @param filename path to file on disk to write to. If empty, data is kept in memory.
+#' @param filename path to file on disk to write to. If empty, data is kept in
+#'   memory.
 #'
 #' @return list(ok=TRUE/FALSE, response=response). If ok=TRUE, response is the
 #'   response from httr::GET. If ok=FALSE, response holds exception text
@@ -34,10 +35,14 @@
 #' @import dplyr
 #' @export
 
-cams_api <- function(lat, lng, date_begin, date_end,
-                     alt=-999, time_step="PT01H", time_ref="UT", verbose=FALSE,
-                     service="get_cams_radiation", format='application/csv', filename="") {
+cams_api <- function(
+  lat, lng, date_begin, date_end,
+  alt=-999, time_step="PT01H", time_ref="UT", verbose=FALSE,
+  service="get_cams_radiation", format='application/csv', filename="") {
+
+  # Stops if now username is provided
   username <- cams_get_user()
+
   body <- paste0(
     '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
     '<wps:Execute service="WPS" version="1.0.0" ',

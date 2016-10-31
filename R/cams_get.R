@@ -24,10 +24,15 @@
 #'
 #' @export
 #'
-cams_get_radiation <- function(lat, lng, date_begin, date_end,
-                              time_step="PT01H", alt=-999, verbose=FALSE) {
-  r <- cams_api(lat, lng, date_begin, date_end, alt, time_step=time_step,
-                verbose=verbose, service="get_cams_radiation", format="application/csv",
+cams_get_radiation <- function(
+  lat, lng, date_begin, date_end,
+  time_step="PT01H", alt=-999, verbose=FALSE) {
+
+  r <- cams_api(lat, lng, date_begin, date_end,
+                alt, time_step=time_step,
+                verbose=verbose,
+                service="get_cams_radiation",
+                format="application/csv",
                 filename = tempfile())
   if(r$ok==FALSE) stop(r$response, call. = FALSE)
   return(cams_parse(r$respone$content))
@@ -39,17 +44,22 @@ cams_get_radiation <- function(lat, lng, date_begin, date_end,
 #' @return A data frame with requested solar data
 #'
 #' @examples \dontrun{
-#' df <- cams_get_mcclear(lat=60, lng=15,
-#'                        date_begin="2016-01-01", date_end="2016-01-15")
+#' df <- cams_get_mcclear(
+#'   lat=60, lng=15, date_begin="2016-01-01", date_end="2016-01-15")
 #' print(head(df))
 #' }
 #'
 #' @export
 #'
-cams_get_mcclear <- function(lat, lng, date_begin, date_end,
-                             time_step="PT01H", alt=-999, verbose=FALSE) {
-  r <- cams_api(lat, lng, date_begin, date_end, alt, time_step=time_step,
-                verbose=verbose, service="get_mcclear", format="application/csv",
+cams_get_mcclear <- function(
+  lat, lng, date_begin, date_end,
+  time_step="PT01H", alt=-999, verbose=FALSE) {
+
+  r <- cams_api(lat, lng, date_begin, date_end,
+                alt, time_step=time_step,
+                verbose=verbose,
+                service="get_mcclear",
+                format="application/csv",
                 filename = tempfile())
   if(r$ok==FALSE) stop(r$response, call. = FALSE)
   return(cams_parse(r$respone$content))
