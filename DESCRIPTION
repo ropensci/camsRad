@@ -1,7 +1,7 @@
 Package: camsRad
 Type: Package
 Title: Client for CAMS Radiation Service
-Version: 0.1.1.9001
+Version: 0.1.1.9003
 Date: 2016-10-30
 Authors@R: person("Lukas", "Lundström", email = "lukas.rokka@gmail.com", role = c("aut", "cre"))
 Maintainer: Lukas Lundström <lukas.rokka@gmail.com>
@@ -18,12 +18,11 @@ Depends: R (>= 3.1.0)
 Imports:
     httr (>= 1.2.1),
     dplyr (>= 0.5.0),
-    xml2 (>= 1.0.0),
-    readr (>= 1.0.0)
+    xml2 (>= 1.0.0)
 Suggests:
+    ncdf4,
     roxygen2,
     knitr,
-    ncdf4,
     testthat,
     rmarkdown
 URL: https://github.com/lukas-rokka/camsRad

@@ -1,3 +1,13 @@
+# camsRad 0.3.0 (2016-11-01)
+=========================
+* Compliance with rOpenSci review
+### MINOR IMPROVEMENTS
+* covr::codecov() badge included
+* more testing
+* removed dependency to readr package
+* return data.frame instead of tibble
+* new authentication method
+
 # camsRad 0.2.0 (2016-08-22)
 =========================
 * Realese for onboarding to rOpenSci

@@ -2,5 +2,6 @@
 
 export(cams_api)
 export(cams_get_mcclear)
-export(cams_get_radition)
+export(cams_get_radiation)
+export(cams_set_user)
 import(dplyr)
