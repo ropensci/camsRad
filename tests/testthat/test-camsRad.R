@@ -6,7 +6,7 @@ test_that("Setting/getting user authentication", {
 
   expect_error(cams_set_user("not a valid email"))
   expect_silent(cams_set_user(username))
-  expect_identical(cams_get_user(), username)
+  expect_identical(camsRad:::cams_get_user(), username)
 
   Sys.setenv('CAMS_USERNAME'=username_old)
 })
@@ -17,7 +17,7 @@ context("cams_api")
 test_that("Calling CAMS radiation service API", {
   #skip_on_cran()
 
-  username=Sys.getenv("CAMS_USERNAME")
+  username <- Sys.getenv("CAMS_USERNAME")
   if(username=="") skip("need CAMS_USERNAME to be set")
 
   r <- cams_api(60, 15, "2016-06-01", "2016-06-10",
@@ -29,16 +29,16 @@ test_that("Calling CAMS radiation service API", {
   expect_equal(httr::has_content(r$respone), TRUE)
   expect_equal(httr::http_type(r$respone), "text/csv")
   expect_equal(r$respone$status_code, 200)
-  expect_gt(length(readr::read_lines((rawToChar(r$respone$content)))), 250)
+  expect_gt(length(readLines((rawConnection(r$respone$content)))), 250)
 })
 
 test_that("Calling cams_get_radiation()", {
   #skip_on_cran()
 
-  username=Sys.getenv("CAMS_USERNAME")
+  username <- Sys.getenv("CAMS_USERNAME")
   if(username=="") skip(" CAMS_USERNAME need to be set")
 
-  df <- cams_get_radition(60, 15, "2016-06-01", "2016-06-10", time_step="PT01H")
+  df <- cams_get_radiation(60, 15, "2016-06-01", "2016-06-10", time_step="PT01H")
 
   expect_is(df, "data.frame")
   expect_equal(nrow(df),240)
@@ -55,7 +55,7 @@ test_that("Calling cams_get_radiation()", {
 test_that("Calling cams_get_mcclear()", {
   #skip_on_cran()
 
-  username=Sys.getenv("CAMS_USERNAME")
+  username <- Sys.getenv("CAMS_USERNAME")
   if(username=="") skip("CAMS_USERNAME need to be set")
 
   df <- cams_get_mcclear(60, 15, "2016-06-01", "2016-06-10", time_step="PT01H")
