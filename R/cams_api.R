@@ -3,6 +3,11 @@
 #' radiation service}
 #'
 #' @inheritParams cams_get_radiation
+#' @param time_ref 'UT' for universal time, 'TST' for true solar time
+#' @param service 'get_mcclear' for CAMS McClear data, get_cams_radiation for CAMS
+#'   radiation data
+#' @param format 'application/csv', 'application/json',
+#'   'application/x-netcdf' or 'text/csv'
 #' @param filename path to file on disk to write to. If empty, data is kept in
 #'   memory.
 #'
@@ -14,7 +19,7 @@
 #'
 #' filename <- paste0(tempfile(), ".nc")
 #'
-#' r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10",
+#' r <- cams_api(60, 15, "2016-06-01", "2016-06-10",
 #'               format = "application/x-netcdf", filename=filename)
 #'
 #' # Access the on disk stored ncdf4 file
@@ -32,7 +37,6 @@
 #' nc_close(nc)
 #' }
 #'
-#' @import dplyr
 #' @export
 
 cams_api <- function(

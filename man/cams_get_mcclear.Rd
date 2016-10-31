@@ -12,9 +12,9 @@ cams_get_mcclear(lat, lng, date_begin, date_end, time_step = "PT01H",
 
 \item{lng}{The longitude}
 
-\item{date_begin}{Start date as 'yyy-mm-dd' string}
+\item{date_begin}{Start date as 'yyyy-mm-dd' string}
 
-\item{date_end}{End date as 'yyy-mm-dd' string}
+\item{date_end}{End date as 'yyyy-mm-dd' string}
 
 \item{time_step}{'PT01M' for minutes, 'PT15M' for 15 minutes, 'PT01H' for
 hourly, 'P01D' for daily, 'P01M' for monthly}
@@ -31,8 +31,8 @@ Retrieve McClear clear sky solar radiation data
 }
 \examples{
 \dontrun{
-df <- cams_get_mcclear(lat=60, lng=15,
-                       date_begin="2016-01-01", date_end="2016-01-15")
+df <- cams_get_mcclear(
+  lat=60, lng=15, date_begin="2016-01-01", date_end="2016-01-15")
 print(head(df))
 }
 

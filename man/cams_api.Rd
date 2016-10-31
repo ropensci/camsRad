@@ -3,8 +3,8 @@
 \name{cams_api}
 \alias{cams_api}
 \title{API client for
-  \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
-  radiation service}}
+\href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
+radiation service}}
 \usage{
 cams_api(lat, lng, date_begin, date_end, alt = -999, time_step = "PT01H",
   time_ref = "UT", verbose = FALSE, service = "get_cams_radiation",
@@ -15,9 +15,9 @@ cams_api(lat, lng, date_begin, date_end, alt = -999, time_step = "PT01H",
 
 \item{lng}{The longitude}
 
-\item{date_begin}{Start date as 'yyy-mm-dd' string}
+\item{date_begin}{Start date as 'yyyy-mm-dd' string}
 
-\item{date_end}{End date as 'yyy-mm-dd' string}
+\item{date_end}{End date as 'yyyy-mm-dd' string}
 
 \item{alt}{The altitude in meters, use -999 to let CAMS decide}
 
@@ -34,7 +34,8 @@ radiation data}
 \item{format}{'application/csv', 'application/json',
 'application/x-netcdf' or 'text/csv'}
 
-\item{filename}{path to file on disk to write to. If empty, data is kept in memory.}
+\item{filename}{path to file on disk to write to. If empty, data is kept in
+memory.}
 }
 \value{
 list(ok=TRUE/FALSE, response=response). If ok=TRUE, response is the
@@ -42,8 +43,8 @@ list(ok=TRUE/FALSE, response=response). If ok=TRUE, response is the
 }
 \description{
 API client for
-  \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
-  radiation service}
+\href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
+radiation service}
 }
 \examples{
 \dontrun{
@@ -51,7 +52,7 @@ library(ncdf4)
 
 filename <- paste0(tempfile(), ".nc")
 
-r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10",
+r <- cams_api(60, 15, "2016-06-01", "2016-06-10",
               format = "application/x-netcdf", filename=filename)
 
 # Access the on disk stored ncdf4 file
