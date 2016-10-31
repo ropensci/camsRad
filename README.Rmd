@@ -54,9 +54,10 @@ cams_set_user("your@email.com") # An email registered at soda-pro.com
 Get hourly CAMS solar data into a R data frame. For the location 60° latitude and 15° longitude, and for period 2016-01-01 to 2016-01-15.
 ```{r, eval=FALSE}
 
-df <- cams_get_radiation(lat=60, lng=15, 
-                     date_begin="2016-07-01", 
-                     date_end="2016-07-01")
+df <- cams_get_radiation(
+  lat=60, lng=15, 
+  date_begin="2016-07-01", 
+  date_end="2016-07-01")
 print(df)
 ```
 
@@ -67,10 +68,11 @@ library(ncdf4)
 
 filename <- paste0(tempfile(), ".nc")
 
-r <- cams_api(60, 15, "2016-06-01", "2016-06-10", 
-              format="application/x-netcdf",
-              time_step = "P01D",
-              filename=filename)
+r <- cams_api(
+  60, 15, "2016-06-01", "2016-06-10", 
+  format="application/x-netcdf",
+  time_step = "P01D",
+  filename=filename)
 
 # Access the on disk stored ncdf4 file 
 nc <- nc_open(r$respone$content)
@@ -79,8 +81,9 @@ nc <- nc_open(r$respone$content)
 names(nc$var)
 
 # create data.frame with timestamp and global horizontal irradiation and plot it
-df <- data.frame(timestamp = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
-                 GHI = ncvar_get(nc, "GHI"))
+df <- data.frame(
+  timestamp = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
+  GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")
 

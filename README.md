@@ -37,9 +37,10 @@ Get hourly CAMS solar data into a R data frame. For the location 60° latitude a
 
 ``` r
 
-df <- cams_get_radiation(lat=60, lng=15, 
-                     date_begin="2016-07-01", 
-                     date_end="2016-07-01")
+df <- cams_get_radiation(
+  lat=60, lng=15, 
+  date_begin="2016-07-01", 
+  date_end="2016-07-01")
 print(df)
 ```
 
@@ -52,10 +53,11 @@ library(ncdf4)
 
 filename <- paste0(tempfile(), ".nc")
 
-r <- cams_api(60, 15, "2016-06-01", "2016-06-10", 
-              format="application/x-netcdf",
-              time_step = "P01D",
-              filename=filename)
+r <- cams_api(
+  60, 15, "2016-06-01", "2016-06-10", 
+  format="application/x-netcdf",
+  time_step = "P01D",
+  filename=filename)
 #> No encoding supplied: defaulting to UTF-8.
 
 # Access the on disk stored ncdf4 file 
@@ -71,13 +73,14 @@ names(nc$var)
 #> [21] "GHI"           "BHI"           "DHI"           "BNI"
 
 # create data.frame with timestamp and global horizontal irradiation and plot it
-df <- data.frame(timestamp = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
-                 GHI = ncvar_get(nc, "GHI"))
+df <- data.frame(
+  timestamp = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
+  GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README-unnamed-chunk-6-1.png)
 
 ``` r
 
