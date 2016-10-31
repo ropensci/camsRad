@@ -24,17 +24,22 @@ library("camsRad")
 
 ### Authentication
 
-To access the CAMS radiation service you need to register at <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>. The email you use at the registration step will be used for authentication.
+To access the CAMS radiation service you need to register at <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>. The email you use at the registration step will be used for authentication, and need to be set with `cams_set_user()`.
+
+``` r
+# Authentication
+cams_set_user("your@email.com") # An email registered at soda-pro.com
+```
 
 ### Example 1
 
 Get hourly CAMS solar data into a R data frame. For the location 60° latitude and 15° longitude, and for period 2016-01-01 to 2016-01-15.
 
 ``` r
-username <- "your@email.com" # An email registered at soda-pro.com
 
-df <- cams_get_radition(username, lat=60, lng=15, 
-                        date_begin="2016-01-01", date_end="2016-01-15")
+df <- cams_get_radiation(lat=60, lng=15, 
+                     date_begin="2016-07-01", 
+                     date_end="2016-07-01")
 print(df)
 ```
 
@@ -47,22 +52,34 @@ library(ncdf4)
 
 filename <- paste0(tempfile(), ".nc")
 
-r <- cams_api(username, 60, 15, "2016-06-01", "2016-06-10", 
+r <- cams_api(60, 15, "2016-06-01", "2016-06-10", 
               format="application/x-netcdf",
               time_step = "P01D",
               filename=filename)
+#> No encoding supplied: defaulting to UTF-8.
 
 # Access the on disk stored ncdf4 file 
 nc <- nc_open(r$respone$content)
 
 # list names of available variables
 names(nc$var)
+#>  [1] "ut_jd"         "ut_year"       "ut_month"      "ut_day"       
+#>  [5] "ut_hour"       "ut_minute"     "ut_second"     "tst_jd"       
+#>  [9] "tst_year"      "tst_month"     "tst_day"       "tst_hour"     
+#> [13] "tst_minute"    "tst_second"    "G0"            "CLEAR_SKY_GHI"
+#> [17] "CLEAR_SKY_BHI" "CLEAR_SKY_DHI" "CLEAR_SKY_BNI" "rely"         
+#> [21] "GHI"           "BHI"           "DHI"           "BNI"
 
 # create data.frame with timestamp and global horizontal irradiation and plot it
 df <- data.frame(timestamp = as.POSIXct(nc$dim$time$vals, "UTC", origin="1970-01-01"),
                  GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+``` r
 
 nc_close(nc)
 ```
