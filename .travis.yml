@@ -10,10 +10,10 @@ addons:
       - libnetcdf-dev
       - netcdf-bin
 
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+#notifications:
+#  email:
+#    on_success: change
+#    on_failure: change
 
 #r_github_packages:
 #  - jimhester/covr
