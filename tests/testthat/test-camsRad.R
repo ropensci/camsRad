@@ -1,6 +1,8 @@
 context("cams set/get user")
 
 test_that("Setting/getting user authentication", {
+  testthat::skip_on_travis() # Conflicts with Travis environment
+
   username_old=Sys.getenv("CAMS_USERNAME")
   if(username_old=="") {username <- "your@email.com"}
 
