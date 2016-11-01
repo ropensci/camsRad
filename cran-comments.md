@@ -1,4 +1,5 @@
-This is a new releas. [Onboarding candidate at](https://github.com/ropensci/onboarding/issues/72)
+This is the first submission of this packe.
+[Onboarding candidate at](https://github.com/ropensci/onboarding/issues/72)
 
 ## Test environments
 * local Windows 7 x64 install, R 3.3.1
