@@ -3,13 +3,14 @@
 #' radiation service}
 #'
 #' @inheritParams cams_get_radiation
-#' @param time_ref 'UT' for universal time, 'TST' for true solar time
-#' @param service 'get_mcclear' for CAMS McClear data, get_cams_radiation for CAMS
-#'   radiation data
-#' @param format 'application/csv', 'application/json',
-#'   'application/x-netcdf' or 'text/csv'
+#' @param time_ref Time reference:'UT' for universal time, 'TST' for true solar
+#'   time. Default 'UT'
+#' @param service 'get_mcclear' for CAMS McClear data, 'get_cams_radiation' for
+#'   CAMS radiation data. Default 'get_cams_radiation'
+#' @param format 'application/csv', 'application/json', 'application/x-netcdf'
+#'   or 'text/csv'. Default 'application/csv'
 #' @param filename path to file on disk to write to. If empty, data is kept in
-#'   memory.
+#'   memory. Default empty
 #'
 #' @return list(ok=TRUE/FALSE, response=response). If ok=TRUE, response is the
 #'   response from httr::GET. If ok=FALSE, response holds exception text
@@ -19,11 +20,17 @@
 #'
 #' filename <- paste0(tempfile(), ".nc")
 #'
-#' r <- cams_api(60, 15, "2016-06-01", "2016-06-10",
-#'               format = "application/x-netcdf", filename=filename)
+#' # API call to CAMS
+#' r <- cams_api(
+#'   60, 15,                       # latitude=60, longitude=15
+#'   "2016-06-01", "2016-06-10",   # for 2016-06-01 to 2016-06-10
+#'   time_step="PT01H",            # hourly data
+#'   service="get_cams_radiation", # CAMS radiation
+#'   format="application/x-netcdf",# netCDF format
+#'   filename=filename)            # file to save to
 #'
 #' # Access the on disk stored ncdf4 file
-#' nc <- nc_open(r$respone$content)
+#' nc <- nc_open(r$response$content)
 #' # list names of available variables
 #' names(nc$var)
 #'
@@ -44,7 +51,7 @@ cams_api <- function(
   alt=-999, time_step="PT01H", time_ref="UT", verbose=FALSE,
   service="get_cams_radiation", format='application/csv', filename="") {
 
-  # Stops if now username is provided
+  # Stop if username is not provided
   username <- cams_get_user()
 
   body <- paste0(
@@ -85,32 +92,35 @@ cams_api <- function(
 
   if(verbose) httr::set_config(httr::verbose())
 
-  r <- tryCatch(
-    httr::POST("http://www.soda-is.com/service/wps",
-               body=body,
-               httr::content_type("text/xml; charset=utf.8"),
-               encode= "multipart",
-               httr::accept_xml())
-    , error = function(e) {e})
+  r <- httr::POST(
+    "http://www.soda-is.com/service/wps",
+    body=body,
+    httr::content_type("text/xml; charset=utf.8"),
+    encode= "multipart",
+    httr::accept_xml())
 
-  if(is.null(r$status_code)) {
-    # should not happen
-    stop(r)
-  } else if(r$status_code !=200) {
-    stop(httr::content(r))
+  httr::reset_config()
+
+  # stop if request not successful
+  httr::stop_for_status(r, "request data from soda-pro.com")
+
+  if (httr::http_type(r) != "application/xml") {
+    stop("soda-pro.com did not return xml", call. = FALSE)
   }
 
-  parsed <- httr::content(r)
+  # parse content into xml
+  parsed <- xml2::read_xml(
+    httr::content(r, as="text", encoding="UTF-8"))
 
   if(verbose) print(parsed)
 
   # test if //wps:ProcessSucceeded //wps:Reference exists, else return ExceptionText if exist
   if(length(xml2::xml_find_all(parsed, "//wps:ProcessSucceeded"))==0 |
      length(xml2::xml_find_all(parsed, "//wps:Reference"))==0) {
-    httr::reset_config()
     if(length(xml2::xml_find_all(parsed, "//ows:ExceptionText"))>0) {
-      return(list(ok=FALSE,
-                  response=xml2::xml_text(xml2::xml_find_all(parsed, "//ows:ExceptionText"))))
+      return(list(
+        ok=FALSE,
+        response=xml2::xml_text(xml2::xml_find_all(parsed, "//ows:ExceptionText"))))
     } else {
       return(list(ok=FALSE, response=r))
     }
@@ -125,7 +135,7 @@ cams_api <- function(
   } else {
     r <- httr::GET(url, httr::write_disk(filename, overwrite = TRUE))
   }
-  httr::reset_config()
-  return(list(ok=(r$status_code==200), respone=r))
+
+  return(list(ok=(r$status_code==200), response=r))
 }
 
