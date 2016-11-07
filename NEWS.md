@@ -1,4 +1,4 @@
-# camsRad 0.3.0 (2016-11-01)
+# camsRad 0.3.0 (2016-11-07)
 =========================
 * Compliance with rOpenSci review
 ### MINOR IMPROVEMENTS
@@ -7,6 +7,8 @@
 * removed dependency to readr package
 * return data.frame instead of tibble
 * new authentication method
+* more examples and improved documentation
+* cams_api stops if error in httr calls or errir in returned content
 
 # camsRad 0.2.0 (2016-08-22)
 =========================
