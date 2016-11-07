@@ -10,7 +10,8 @@ addons:
       - libnetcdf-dev
       - netcdf-bin
 
-r_github_packages:
-  - jimhester/covr
-after_success:
-  - Rscript -e 'covr::codecov()'
+# done locally because of tests that conflicts with Travis environment
+#r_github_packages:
+#  - jimhester/covr
+#after_success:
+#  - Rscript -e 'covr::codecov()'
