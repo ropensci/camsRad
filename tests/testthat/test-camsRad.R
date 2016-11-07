@@ -28,10 +28,10 @@ test_that("Calling CAMS radiation service API", {
   expect_is(r, "list")
   expect_equal(length(r),2)
   expect_equal(r$ok, TRUE)
-  expect_equal(httr::has_content(r$respone), TRUE)
-  expect_equal(httr::http_type(r$respone), "text/csv")
-  expect_equal(r$respone$status_code, 200)
-  expect_gt(length(readLines((rawConnection(r$respone$content)))), 250)
+  expect_equal(httr::has_content(r$response), TRUE)
+  expect_equal(httr::http_type(r$response), "text/csv")
+  expect_equal(r$response$status_code, 200)
+  expect_gt(length(readLines((rawConnection(r$response$content)))), 250)
 })
 
 test_that("Calling cams_get_radiation()", {

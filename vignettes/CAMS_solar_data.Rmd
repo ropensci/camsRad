@@ -1,7 +1,7 @@
 ---
 title: "Working with CAMS solar data"
 author: "Lukas Lundström"
-date: "2016-11-01"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Working with CAMS solar data}
@@ -71,7 +71,7 @@ r <- cams_api(
   filename=filename)
 
 # Access the on disk stored netCDF file
-nc <- nc_open(r$respone$content)  
+nc <- nc_open(r$response$content)  
 
 # List names of available variables
 names(nc$var)

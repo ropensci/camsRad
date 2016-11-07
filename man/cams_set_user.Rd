@@ -7,14 +7,14 @@
 cams_set_user(username)
 }
 \arguments{
-\item{username}{Email registered at soda-pro.com.}
+\item{username}{Email registered at soda-pro.com. Required}
 }
 \description{
 Set username used for authentication by CAMS radiation service
 }
 \examples{
 \dontrun{
-cams_set_user("your@email.com") # An email registered at soda-pro.com
+# cams_set_user("your@email.com") # An email registered at soda-pro.com
 }
 
 }

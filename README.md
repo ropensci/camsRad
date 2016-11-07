@@ -58,19 +58,12 @@ r <- cams_api(
   format="application/x-netcdf",
   time_step = "P01D",
   filename=filename)
-#> No encoding supplied: defaulting to UTF-8.
 
 # Access the on disk stored ncdf4 file 
-nc <- nc_open(r$respone$content)
+nc <- nc_open(r$response$content)
 
 # list names of available variables
 names(nc$var)
-#>  [1] "ut_jd"         "ut_year"       "ut_month"      "ut_day"       
-#>  [5] "ut_hour"       "ut_minute"     "ut_second"     "tst_jd"       
-#>  [9] "tst_year"      "tst_month"     "tst_day"       "tst_hour"     
-#> [13] "tst_minute"    "tst_second"    "G0"            "CLEAR_SKY_GHI"
-#> [17] "CLEAR_SKY_BHI" "CLEAR_SKY_DHI" "CLEAR_SKY_BNI" "rely"         
-#> [21] "GHI"           "BHI"           "DHI"           "BNI"
 
 # create data.frame with timestamp and global horizontal irradiation and plot it
 df <- data.frame(
@@ -78,11 +71,6 @@ df <- data.frame(
   GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")
-```
-
-![](README-unnamed-chunk-6-1.png)
-
-``` r
 
 nc_close(nc)
 ```

@@ -75,7 +75,7 @@ r <- cams_api(
   filename=filename)
 
 # Access the on disk stored ncdf4 file 
-nc <- nc_open(r$respone$content)
+nc <- nc_open(r$response$content)
 
 # list names of available variables
 names(nc$var)

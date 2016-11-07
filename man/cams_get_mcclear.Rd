@@ -8,20 +8,20 @@ cams_get_mcclear(lat, lng, date_begin, date_end, time_step = "PT01H",
   alt = -999, verbose = FALSE)
 }
 \arguments{
-\item{lat}{The latitude}
+\item{lat}{Latitude, in decimal degrees. Required}
 
-\item{lng}{The longitude}
+\item{lng}{Longitude, in decimal degrees. Required}
 
-\item{date_begin}{Start date as 'yyyy-mm-dd' string}
+\item{date_begin}{Start date as 'yyyy-mm-dd' string. Required}
 
-\item{date_end}{End date as 'yyyy-mm-dd' string}
+\item{date_end}{End date as 'yyyy-mm-dd' string. Required}
 
-\item{time_step}{'PT01M' for minutes, 'PT15M' for 15 minutes, 'PT01H' for
-hourly, 'P01D' for daily, 'P01M' for monthly}
+\item{time_step}{Aggregation: 'PT01M' for minutes, 'PT15M' for 15 minutes,
+'PT01H' for hourly, 'P01D' for daily, 'P01M' for monthly. Deafult 'PT01H'}
 
-\item{alt}{The altitude in meters, use -999 to let CAMS decide}
+\item{alt}{Altitude in meters, use -999 to let CAMS decide. Default -99}
 
-\item{verbose}{TRUE for verbose output}
+\item{verbose}{TRUE for verbose output. Default "FALSE"}
 }
 \value{
 A data frame with requested solar data

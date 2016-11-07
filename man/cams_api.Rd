@@ -11,31 +11,32 @@ cams_api(lat, lng, date_begin, date_end, alt = -999, time_step = "PT01H",
   format = "application/csv", filename = "")
 }
 \arguments{
-\item{lat}{The latitude}
+\item{lat}{Latitude, in decimal degrees. Required}
 
-\item{lng}{The longitude}
+\item{lng}{Longitude, in decimal degrees. Required}
 
-\item{date_begin}{Start date as 'yyyy-mm-dd' string}
+\item{date_begin}{Start date as 'yyyy-mm-dd' string. Required}
 
-\item{date_end}{End date as 'yyyy-mm-dd' string}
+\item{date_end}{End date as 'yyyy-mm-dd' string. Required}
 
-\item{alt}{The altitude in meters, use -999 to let CAMS decide}
+\item{alt}{Altitude in meters, use -999 to let CAMS decide. Default -99}
 
-\item{time_step}{'PT01M' for minutes, 'PT15M' for 15 minutes, 'PT01H' for
-hourly, 'P01D' for daily, 'P01M' for monthly}
+\item{time_step}{Aggregation: 'PT01M' for minutes, 'PT15M' for 15 minutes,
+'PT01H' for hourly, 'P01D' for daily, 'P01M' for monthly. Deafult 'PT01H'}
 
-\item{time_ref}{'UT' for universal time, 'TST' for true solar time}
+\item{time_ref}{Time reference:'UT' for universal time, 'TST' for true solar
+time. Default 'UT'}
 
-\item{verbose}{TRUE for verbose output}
+\item{verbose}{TRUE for verbose output. Default "FALSE"}
 
-\item{service}{'get_mcclear' for CAMS McClear data, get_cams_radiation for CAMS
-radiation data}
+\item{service}{'get_mcclear' for CAMS McClear data, 'get_cams_radiation' for
+CAMS radiation data. Default 'get_cams_radiation'}
 
-\item{format}{'application/csv', 'application/json',
-'application/x-netcdf' or 'text/csv'}
+\item{format}{'application/csv', 'application/json', 'application/x-netcdf'
+or 'text/csv'. Default 'application/csv'}
 
 \item{filename}{path to file on disk to write to. If empty, data is kept in
-memory.}
+memory. Default empty}
 }
 \value{
 list(ok=TRUE/FALSE, response=response). If ok=TRUE, response is the
@@ -52,11 +53,17 @@ library(ncdf4)
 
 filename <- paste0(tempfile(), ".nc")
 
-r <- cams_api(60, 15, "2016-06-01", "2016-06-10",
-              format = "application/x-netcdf", filename=filename)
+# API call to CAMS
+r <- cams_api(
+  60, 15,                       # latitude=60, longitude=15
+  "2016-06-01", "2016-06-10",   # for 2016-06-01 to 2016-06-10
+  time_step="PT01H",            # hourly data
+  service="get_cams_radiation", # CAMS radiation
+  format="application/x-netcdf",# netCDF format
+  filename=filename)            # file to save to
 
 # Access the on disk stored ncdf4 file
-nc <- nc_open(r$respone$content)
+nc <- nc_open(r$response$content)
 # list names of available variables
 names(nc$var)
 

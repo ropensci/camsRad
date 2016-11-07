@@ -1,20 +1,29 @@
 #' Retrieve CAMS solar radiation data
 #'
-#' @param lat The latitude
-#' @param lng The longitude
-#' @param date_begin Start date as 'yyyy-mm-dd' string
-#' @param date_end End date as 'yyyy-mm-dd' string
-#' @param alt The altitude in meters, use -999 to let CAMS decide
-#' @param time_step 'PT01M' for minutes, 'PT15M' for 15 minutes, 'PT01H' for
-#'   hourly, 'P01D' for daily, 'P01M' for monthly
-#' @param verbose TRUE for verbose output
+#' @param lat Latitude, in decimal degrees. Required
+#' @param lng Longitude, in decimal degrees. Required
+#' @param date_begin Start date as 'yyyy-mm-dd' string. Required
+#' @param date_end End date as 'yyyy-mm-dd' string. Required
+#' @param alt Altitude in meters, use -999 to let CAMS decide. Default -99
+#' @param time_step Aggregation: 'PT01M' for minutes, 'PT15M' for 15 minutes,
+#'   'PT01H' for hourly, 'P01D' for daily, 'P01M' for monthly. Deafult 'PT01H'
+#' @param verbose TRUE for verbose output. Default "FALSE"
 #'
 #' @return A data frame with requested solar data
 #'
 #' @examples \dontrun{
+#' # Get hourly solar radiation data
 #' df <- cams_get_radiation(
-#'   lat=60, lng=15, date_begin="2016-01-01", date_end="2016-01-15")
-#' print(head(df))
+#'   lat=60, lng=15,
+#'   date_begin="2016-06-01", date_end="2016-06-15")
+#' head(df)
+#'
+#' # Get daily solar radiation data
+#' df <- cams_get_radiation(
+#'   lat=60, lng=15,
+#'   date_begin="2016-06-01", date_end="2016-06-15",
+#'   time_step="P01D")
+#' head(df)
 #' }
 #'
 #' @export
@@ -30,7 +39,7 @@ cams_get_radiation <- function(
                 format="application/csv",
                 filename = tempfile())
   if(r$ok==FALSE) stop(r$response, call. = FALSE)
-  return(cams_parse(r$respone$content))
+  return(cams_parse(r$response$content))
 }
 
 #' Retrieve McClear clear sky solar radiation data
@@ -57,7 +66,7 @@ cams_get_mcclear <- function(
                 format="application/csv",
                 filename = tempfile())
   if(r$ok==FALSE) stop(r$response, call. = FALSE)
-  return(cams_parse(r$respone$content))
+  return(cams_parse(r$response$content))
 }
 
 
