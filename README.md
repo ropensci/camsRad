@@ -3,7 +3,7 @@
 camsRad
 =======
 
-[![Travis-CI Build Status](https://travis-ci.org/lukas-rokka/camsRad.svg?branch=master)](https://travis-ci.org/lukas-rokka/camsRad) [![codecov.io](https://codecov.io/github/lukas-rokka/camsRad/coverage.svg?branch=master)](https://codecov.io/github/lukas-rokka/camsRad?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/camsRad.svg?branch=master)](https://travis-ci.org/ropenscilabs/camsRad) [![codecov.io](https://codecov.io/github/lukas-rokka/camsRad/coverage.svg?branch=master)](https://codecov.io/github/lukas-rokka/camsRad?branch=master)
 
 `camsRad` is a R client for [CAMS radiation service](http://www.soda-pro.com/web-services/radiation/cams-radiation-service). CAMS radiation service provides time series of global, direct, and diffuse irradiations on horizontal surface, and direct irradiation on normal plane for the actual weather conditions as well as for clear-sky conditions. The geographical coverage is the field-of-view of the Meteosat satellite, roughly speaking Europe, Africa, Atlantic Ocean, Middle East (-66° to 66° in both latitudes and longitudes). The time coverage of data is from 2004-02-01 up to 2 days ago. Data are available with a time step ranging from 15 min to 1 month. Target audience are researchers, developers and consultants in need of high resolution solar radiations time series.
 
@@ -15,7 +15,7 @@ Quick start
 Dev version from GitHub.
 
 ``` r
-devtools::install_github("lukas-rokka/camsRad")
+devtools::install_github("ropenscilabs/camsRad")
 ```
 
 ``` r
@@ -80,6 +80,6 @@ Meta
 
 -   This package and functions herein are provided as is, without any guarantee.
 -   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
--   Please [report any issues or bugs](https://github.com/lukas-rokka/camsRad/issues).
+-   Please [report any issues or bugs](https://github.com/ropenscilabs/camsRad/issues).
 
 [![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

@@ -22,9 +22,9 @@ Suggests:
     knitr,
     testthat,
     rmarkdown
-URL: https://github.com/lukas-rokka/camsRad,
+URL: https://github.com/ropenscilabs/camsRad,
     http://www.soda-pro.com/web-services/radiation/cams-radiation-service
-BugReports: https://github.com/lukas-rokka/camsRad/issues
+BugReports: https://github.com/ropenscilabs/camsRad/issues
 LazyData: TRUE
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
