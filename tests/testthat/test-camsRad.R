@@ -3,7 +3,8 @@ context("cams set/get user")
 test_that("Setting/getting user authentication", {
   testthat::skip_on_travis() # Conflicts with Travis environment
 
-  username_old=Sys.getenv("CAMS_USERNAME")
+  username_old <- Sys.getenv("CAMS_USERNAME")
+  username <- username_old
   if(username_old=="") {username <- "your@email.com"}
 
   expect_error(cams_set_user("not a valid email"))
