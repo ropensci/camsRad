@@ -1,5 +1,5 @@
 This is the first submission of this packe.
-[Onboarding candidate at](https://github.com/ropensci/onboarding/issues/72)
+[Review at rOpenSci accepted](https://github.com/ropensci/onboarding/issues/72)
 
 ## Test environments
 * local Windows 7 x64 install, R 3.3.1

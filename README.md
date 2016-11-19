@@ -81,3 +81,5 @@ Meta
 -   This package and functions herein are provided as is, without any guarantee.
 -   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 -   Please [report any issues or bugs](https://github.com/lukas-rokka/camsRad/issues).
+
+[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
