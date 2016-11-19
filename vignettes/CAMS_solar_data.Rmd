@@ -1,7 +1,7 @@
 ---
 title: "Working with CAMS solar data"
 author: "Lukas Lundström"
-date: "`r Sys.Date()`"
+date: "2016-11-01"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Working with CAMS solar data}
