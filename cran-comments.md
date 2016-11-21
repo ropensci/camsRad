@@ -1,3 +1,14 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Converted the DESCRIPTION. Added a url to the service provider in the Description, and removed it from from the Url section.
+
+* Adding a url to Description causes R CMD check to rise following NOTE
+
+checking DESCRIPTION meta-information ... NOTE
+Malformed Description field: should contain one or more complete sentences.
+
+
 This is the first submission of this packe.
 [Review at rOpenSci accepted](https://github.com/ropensci/onboarding/issues/72)
 

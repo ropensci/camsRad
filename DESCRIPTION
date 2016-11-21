@@ -10,7 +10,8 @@ Description: CAMS radiations service provides time series of global, direct, and
     The geographical coverage is the field-of-view of the Meteosat satellite,
     roughly speaking Europe, Africa, Atlantic Ocean, Middle East. The time coverage
     of data is from 2004-02-01 up to 2 days ago. Data are available with a time step
-    ranging from 15 min to 1 month.
+    ranging from 15 min to 1 month. For license terms and to create an account,
+    please see <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>
 License: MIT + file LICENSE
 Depends: R (>= 3.1.0)
 Imports:
@@ -22,8 +23,7 @@ Suggests:
     knitr,
     testthat,
     rmarkdown
-URL: https://github.com/ropenscilabs/camsRad,
-    http://www.soda-pro.com/web-services/radiation/cams-radiation-service
+URL: https://github.com/ropenscilabs/camsRad
 BugReports: https://github.com/ropenscilabs/camsRad/issues
 LazyData: TRUE
 RoxygenNote: 5.0.1
