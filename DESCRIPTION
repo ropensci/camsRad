@@ -12,7 +12,7 @@ Description: Copernicus Atmosphere Monitoring Service (CAMS) radiations service
     roughly speaking Europe, Africa, Atlantic Ocean, Middle East. The time coverage
     of data is from 2004-02-01 up to 2 days ago. Data are available with a time step
     ranging from 15 min to 1 month. For license terms and to create an account,
-    please see <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>
+    please see http://www.soda-pro.com/web-services/radiation/cams-radiation-service. 
 License: MIT + file LICENSE
 Depends: R (>= 3.1.0)
 Imports:
