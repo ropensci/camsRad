@@ -1,3 +1,14 @@
+## Resubmission II
+
+This is a resubmission. In this version I have:
+
+* Spelled out the abbreviation 'CAMS' in the Description part
+of DESCRIPTION file
+
+* On request I added a url (web pointer) to Description, this causes R CMD check to rise 
+a NOTE on "Malformed Description field: should contain one or more complete sentences.". 
+
+
 ## Resubmission
 This is a resubmission. In this version I have:
 
