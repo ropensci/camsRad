@@ -1,3 +1,10 @@
+## Resubmission IV
+
+This is a resubmission. In this version I have:
+
+* Added brackets to the url in the Description field of the DESCRIPTION file.
+
+
 ## Resubmission III
 
 This is a resubmission. In this version I have:
