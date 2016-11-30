@@ -1,3 +1,11 @@
+## Resubmission III
+
+This is a resubmission. In this version I have:
+
+* Added a period after the url in the Description field of the DESCRIPTION file, which
+helped regarding NOTE on Malformed Description field. 
+
+
 ## Resubmission II
 
 This is a resubmission. In this version I have:
