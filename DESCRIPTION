@@ -4,9 +4,10 @@ Title: Client for CAMS Radiation Service
 Version: 0.3.0
 Authors@R: person("Lukas", "Lundstrom", email = "lukas.rokka@gmail.com", role = c("aut", "cre"))
 Maintainer: Lukas Lundstrom <lukas.rokka@gmail.com>
-Description: CAMS radiations service provides time series of global, direct, and
-    diffuse irradiations on horizontal surface, and direct irradiation on normal
-    plane for the actual weather conditions as well as for clear-sky conditions.
+Description: Copernicus Atmosphere Monitoring Service (CAMS) radiations service 
+    provides time series of global, direct, and diffuse irradiations on horizontal
+    surface, and direct irradiation on normal plane for the actual weather 
+    conditions as well as for clear-sky conditions.
     The geographical coverage is the field-of-view of the Meteosat satellite,
     roughly speaking Europe, Africa, Atlantic Ocean, Middle East. The time coverage
     of data is from 2004-02-01 up to 2 days ago. Data are available with a time step
