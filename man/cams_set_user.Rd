@@ -18,4 +18,3 @@ Set username used for authentication by CAMS radiation service
 }
 
 }
-

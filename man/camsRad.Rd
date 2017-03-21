@@ -15,4 +15,3 @@ both latitudes and longitudes). The time coverage of data is from 2004-02-01
 up to 2 days ago. Data are available with a time step ranging from 15 min to
 1 month.
 }
-

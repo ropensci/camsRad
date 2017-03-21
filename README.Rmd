@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-",
+  fig.path = "inst/img/README-",
   warning = FALSE
 )
 if(Sys.getenv("CAMS_USERNAME")=="") {
@@ -20,10 +20,10 @@ camsRad
 =======
 
 [![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/camsRad.svg?branch=master)](https://travis-ci.org/ropenscilabs/camsRad)
-[![codecov.io](https://codecov.io/github/lukas-rokka/camsRad/coverage.svg?branch=master)](https://codecov.io/github/lukas-rokka/camsRad?branch=master)
+[![codecov.io](https://codecov.io/gh/ropenscilabs/camsRad/coverage.svg?branch=master)](https://codecov.io/gh/ropenscilabs/camsRad)
 
 
-`camsRad` is a R client for [CAMS radiation service](http://www.soda-pro.com/web-services/radiation/cams-radiation-service). CAMS radiation service provides time series of global, direct, and diffuse irradiations on horizontal surface, and direct irradiation on normal plane for the actual weather conditions as well as for clear-sky conditions. The geographical coverage is the field-of-view of the Meteosat satellite, roughly speaking Europe, Africa, Atlantic Ocean, Middle East (-66° to 66° in both latitudes and longitudes). The time coverage of data is from 2004-02-01 up to 2 days ago. Data are available with a time step ranging from 15 min to 1 month. Target audience are researchers, developers and consultants in need of high resolution solar radiations time series. 
+`camsRad` is a R client for [CAMS Radiation Service](http://www.soda-pro.com/web-services/radiation/cams-radiation-service). CAMS Radiation Service provides time series of global, direct, and diffuse irradiations on horizontal surface, and direct irradiation on normal plane for the actual weather conditions as well as for clear-sky conditions. The geographical coverage is the field-of-view of the Meteosat satellite, roughly speaking Europe, Africa, Atlantic Ocean, Middle East (-66° to 66° in both latitudes and longitudes). The time coverage of data is from 2004-02-01 up to 2 days ago. Data are available with a time step ranging from 15 min to 1 month. Target audience are researchers, developers and consultants in need of high resolution solar radiations time series. 
 
 ## Quick start
 
@@ -32,6 +32,11 @@ camsRad
 Dev version from GitHub.
 
 ```{r eval=FALSE}
+# CRAN version
+install.packages("camsRad")
+
+# Or Github version
+if (!require('devtools')) install.packages('devtools')
 devtools::install_github("ropenscilabs/camsRad")
 ```
 
@@ -41,7 +46,7 @@ library("camsRad")
 
 ### Authentication
 
-To access the CAMS radiation service you need to register at [http://www.soda-pro.com/web-services/radiation/cams-radiation-service](http://www.soda-pro.com/web-services/radiation/cams-radiation-service). The email you use at the registration step will be used for authentication, and need to be set with  `cams_set_user()`.
+To access the CAMS Radiation Service you need to register at [http://www.soda-pro.com/web-services/radiation/cams-radiation-service](http://www.soda-pro.com/web-services/radiation/cams-radiation-service). The email you use at the registration step will be used for authentication, and need to be set with  `cams_set_user()`.
 
 ```{r eval=FALSE}
 # Authentication

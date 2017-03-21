@@ -3,9 +3,9 @@
 camsRad
 =======
 
-[![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/camsRad.svg?branch=master)](https://travis-ci.org/ropenscilabs/camsRad) [![codecov.io](https://codecov.io/github/lukas-rokka/camsRad/coverage.svg?branch=master)](https://codecov.io/github/lukas-rokka/camsRad?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/ropenscilabs/camsRad.svg?branch=master)](https://travis-ci.org/ropenscilabs/camsRad) [![codecov.io](https://codecov.io/gh/ropenscilabs/camsRad/coverage.svg?branch=master)](https://codecov.io/gh/ropenscilabs/camsRad)
 
-`camsRad` is a R client for [CAMS radiation service](http://www.soda-pro.com/web-services/radiation/cams-radiation-service). CAMS radiation service provides time series of global, direct, and diffuse irradiations on horizontal surface, and direct irradiation on normal plane for the actual weather conditions as well as for clear-sky conditions. The geographical coverage is the field-of-view of the Meteosat satellite, roughly speaking Europe, Africa, Atlantic Ocean, Middle East (-66° to 66° in both latitudes and longitudes). The time coverage of data is from 2004-02-01 up to 2 days ago. Data are available with a time step ranging from 15 min to 1 month. Target audience are researchers, developers and consultants in need of high resolution solar radiations time series.
+`camsRad` is a R client for [CAMS Radiation Service](http://www.soda-pro.com/web-services/radiation/cams-radiation-service). CAMS Radiation Service provides time series of global, direct, and diffuse irradiations on horizontal surface, and direct irradiation on normal plane for the actual weather conditions as well as for clear-sky conditions. The geographical coverage is the field-of-view of the Meteosat satellite, roughly speaking Europe, Africa, Atlantic Ocean, Middle East (-66° to 66° in both latitudes and longitudes). The time coverage of data is from 2004-02-01 up to 2 days ago. Data are available with a time step ranging from 15 min to 1 month. Target audience are researchers, developers and consultants in need of high resolution solar radiations time series.
 
 Quick start
 -----------
@@ -15,6 +15,11 @@ Quick start
 Dev version from GitHub.
 
 ``` r
+# CRAN version
+install.packages("camsRad")
+
+# Or Github version
+if (!require('devtools')) install.packages('devtools')
 devtools::install_github("ropenscilabs/camsRad")
 ```
 
@@ -24,7 +29,7 @@ library("camsRad")
 
 ### Authentication
 
-To access the CAMS radiation service you need to register at <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>. The email you use at the registration step will be used for authentication, and need to be set with `cams_set_user()`.
+To access the CAMS Radiation Service you need to register at <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>. The email you use at the registration step will be used for authentication, and need to be set with `cams_set_user()`.
 
 ``` r
 # Authentication
@@ -64,6 +69,12 @@ nc <- nc_open(r$response$content)
 
 # list names of available variables
 names(nc$var)
+#>  [1] "ut_jd"         "ut_year"       "ut_month"      "ut_day"       
+#>  [5] "ut_hour"       "ut_minute"     "ut_second"     "tst_jd"       
+#>  [9] "tst_year"      "tst_month"     "tst_day"       "tst_hour"     
+#> [13] "tst_minute"    "tst_second"    "G0"            "CLEAR_SKY_GHI"
+#> [17] "CLEAR_SKY_BHI" "CLEAR_SKY_DHI" "CLEAR_SKY_BNI" "rely"         
+#> [21] "GHI"           "BHI"           "DHI"           "BNI"
 
 # create data.frame with timestamp and global horizontal irradiation and plot it
 df <- data.frame(
@@ -71,6 +82,11 @@ df <- data.frame(
   GHI = ncvar_get(nc, "GHI"))
 
 plot(df, type="l")
+```
+
+![](inst/img/README-unnamed-chunk-6-1.png)
+
+``` r
 
 nc_close(nc)
 ```
