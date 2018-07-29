@@ -24,8 +24,8 @@ Suggests:
     knitr,
     testthat,
     rmarkdown
-URL: https://github.com/ropenscilabs/camsRad
-BugReports: https://github.com/ropenscilabs/camsRad/issues
+URL: https://github.com/ropensci/camsRad
+BugReports: https://github.com/ropensci/camsRad/issues
 LazyData: TRUE
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
