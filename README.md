@@ -65,7 +65,7 @@ r <- cams_api(
   filename=filename)
 
 # Access the on disk stored ncdf4 file 
-nc <- nc_open(r$response$content)
+nc <- nc_open(filename)
 
 # list names of available variables
 names(nc$var)
@@ -87,5 +87,8 @@ Meta
 -   Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 -   Please [report any issues or bugs](https://github.com/ropensci/camsRad/issues).
 
-<!--[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org) -->
+<!--[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org) 
+doesn´t knit. add following to the .md file
+[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+-->
 [![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

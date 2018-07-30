@@ -6,9 +6,10 @@
 \href{http://www.soda-pro.com/web-services/radiation/cams-radiation-service}{CAMS
 radiation service}}
 \usage{
-cams_api(lat, lng, date_begin, date_end, alt = -999, time_step = "PT01H",
-  time_ref = "UT", verbose = FALSE, service = "get_cams_radiation",
-  format = "application/csv", filename = "")
+cams_api(lat, lng, date_begin, date_end, alt = -999,
+  time_step = "PT01H", time_ref = "UT", verbose = FALSE,
+  service = "get_cams_radiation", format = "application/csv",
+  filename = "")
 }
 \arguments{
 \item{lat}{Latitude, in decimal degrees. Required}
@@ -63,7 +64,7 @@ r <- cams_api(
   filename=filename)            # file to save to
 
 # Access the on disk stored ncdf4 file
-nc <- nc_open(r$response$content)
+nc <- nc_open(filename)
 # list names of available variables
 names(nc$var)
 

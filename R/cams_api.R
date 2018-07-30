@@ -30,7 +30,7 @@
 #'   filename=filename)            # file to save to
 #'
 #' # Access the on disk stored ncdf4 file
-#' nc <- nc_open(r$response$content)
+#' nc <- nc_open(filename)
 #' # list names of available variables
 #' names(nc$var)
 #'

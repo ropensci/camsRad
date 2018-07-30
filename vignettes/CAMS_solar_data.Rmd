@@ -71,7 +71,7 @@ r <- cams_api(
   filename=filename)
 
 # Access the on disk stored netCDF file
-nc <- nc_open(r$response$content)  
+nc <- nc_open(filename)  
 
 # List names of available variables
 names(nc$var)

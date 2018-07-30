@@ -14,6 +14,7 @@ Description: Copernicus Atmosphere Monitoring Service (CAMS) Radiation Service
     ranging from 15 min to 1 month. For license terms and to create an account,
     please see <http://www.soda-pro.com/web-services/radiation/cams-radiation-service>. 
 License: MIT + file LICENSE
+Encoding: UTF-8
 Depends: R (>= 3.1.0)
 Imports:
     httr (>= 1.2.1),
@@ -27,5 +28,5 @@ Suggests:
 URL: https://github.com/ropensci/camsRad
 BugReports: https://github.com/ropensci/camsRad/issues
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 VignetteBuilder: knitr
